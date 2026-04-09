@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>RIDA APP</title>
+
   <style>
     body {
       margin: 0;
@@ -10,9 +11,11 @@
       color: white;
       text-align: center;
     }
+
     h1 {
       margin-top: 50px;
     }
+
     #map {
       height: 400px;
       width: 90%;
@@ -21,31 +24,67 @@
     }
   </style>
 </head>
+
 <body>
 
-<h1>🚗 RIDA APP</h1>
+  <h1>🚗 RIDA APP</h1>
 
-<div id="map"></div>
+  <div id="map"></div>
 
-<script>
-  function initMap() {
-    const location = { lat: 9.9281, lng: -84.0907 }; // Costa Rica
+  <script>
+    let map;
 
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: location,
-    });
+    function initMap() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            const userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
 
-    new google.maps.Marker({
-      position: location,
-      map: map,
-    });
-  }
-</script>
+            map = new google.maps.Map(document.getElementById("map"), {
+              zoom: 15,
+              center: userLocation,
+            });
 
-<script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjJHchXDupX0bJAQcIIqWZLqkpUKLuVMo&callback=initMap">
-</script>
+            new google.maps.Marker({
+              position: userLocation,
+              map: map,
+              title: "Estás aquí"
+            });
+
+            console.log("Ubicación detectada:", userLocation);
+          },
+
+          function(error) {
+            alert("No se pudo obtener tu ubicación 😢");
+            console.log(error);
+          }
+        );
+      } else {
+        alert("Tu navegador no soporta geolocalización");
+      }
+    }
+  </script>
+
+  <!-- GOOGLE MAPS -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjJHchXDupX0bJAQcIIqWZLqkpUKLuVMo&callback=initMap">
+  </script>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script>
+    const supabase = supabase.createClient(
+     "https://vlczglouxsgtbbtxisek.supabase.co";
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsY3pnbG91eHNndGJidHhpc2VrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1MTcxMjYsImV4cCI6MjA5MTA5MzEyNn0.SdJJw_JEaqByv-NEnk7datVj6-imlnEupapNREporOU";
+
+    );
+
+    console.log("Supabase conectado", supabase);
+  </script>
 
 </body>
 </html>
