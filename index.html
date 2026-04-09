@@ -29,6 +29,46 @@
 
   <h1>🚗 RIDA APP</h1>
 
+
+
+  <div id="auth-container">
+    <form id="login-form" style="max-width:320px;margin:30px auto;display:block;background:#13294b;padding:24px 18px;border-radius:8px;">
+      <h2>Login</h2>
+      <input id="email" type="email" placeholder="Email" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
+      <input id="password" type="password" placeholder="Password" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
+      <button type="submit" style="width:45%;margin:8px 2%;padding:8px 0;border-radius:4px;border:none;background:#1e90ff;color:white;">Login</button>
+    </form>
+    <form id="register-form" style="max-width:320px;margin:0 auto 16px auto;display:block;background:#13294b;padding:18px;border-radius:8px;">
+      <h2>Register</h2>
+      <input id="reg-email" type="email" placeholder="Email" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
+      <input id="reg-password" type="password" placeholder="Password" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
+      <button type="submit" style="width:45%;margin:8px 2%;padding:8px 0;border-radius:4px;border:none;background:#28a745;color:white;">Register</button>
+    </form>
+    <div id="auth-message" style="margin:10px 0;min-height:24px;"></div>
+  </div>
+
+  <div id="app-container" style="display:none;max-width:400px;margin:32px auto 0 auto;background:#13294b;padding:24px 0 32px 0;border-radius:10px;">
+    <div id="dashboard">
+      <h2>Welcome, <span id="dashboard-email"></span></h2>
+      <button id="client-mode-btn" style="margin:8px 4px;padding:10px 24px;border-radius:6px;border:none;background:#1e90ff;color:white;">Client Mode</button>
+      <button id="driver-mode-btn" style="margin:8px 4px;padding:10px 24px;border-radius:6px;border:none;background:#28a745;color:white;">Driver Mode</button>
+      <button id="marketplace-btn" style="margin:8px 4px;padding:10px 24px;border-radius:6px;border:none;background:#ffc107;color:#222;">Marketplace</button>
+      <button id="logout-btn" style="margin:8px 4px;padding:10px 24px;border-radius:6px;border:none;background:#e74c3c;color:white;float:right;">Logout</button>
+    </div>
+    <div id="client-section" style="display:none;margin-top:24px;">
+      <h3>Request Ride</h3>
+      <p>Client mode placeholder screen.</p>
+    </div>
+    <div id="driver-section" style="display:none;margin-top:24px;">
+      <h3>Driver Dashboard</h3>
+      <p>Driver mode placeholder screen.</p>
+    </div>
+    <div id="marketplace-section" style="display:none;margin-top:24px;">
+      <h3>Coming soon</h3>
+      <p>Marketplace placeholder screen.</p>
+    </div>
+  </div>
+
   <div id="map"></div>
 
   <script>
@@ -73,18 +113,10 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjJHchXDupX0bJAQcIIqWZLqkpUKLuVMo&callback=initMap">
   </script>
 
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  <script>
-    const supabase = supabase.createClient(
-     "https://vlczglouxsgtbbtxisek.supabase.co";
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsY3pnbG91eHNndGJidHhpc2VrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1MTcxMjYsImV4cCI6MjA5MTA5MzEyNn0.SdJJw_JEaqByv-NEnk7datVj6-imlnEupapNREporOU";
-
-    );
-
-    console.log("Supabase conectado", supabase);
-  </script>
+  <!-- SUPABASE AUTH UI/LOGIC & APP FLOW -->
+  <script type="module" src="./ui/lib/auth-ui.js"></script>
+  <script type="module" src="./ui/lib/app-flow.js"></script>
 
 </body>
 </html>
