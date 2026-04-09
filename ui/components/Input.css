@@ -1,0 +1,16 @@
+.ui-input {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  border: 2px solid var(--color-primary-neon);
+  border-radius: var(--border-radius);
+  padding: 0.75em 1em;
+  font-size: 1rem;
+  margin-bottom: 1em;
+  outline: none;
+  box-shadow: 0 0 8px var(--color-primary-neon) inset;
+  transition: border var(--transition), box-shadow var(--transition);
+}
+.ui-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 16px var(--color-accent);
+}

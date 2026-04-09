@@ -1,0 +1,12 @@
+.ui-card {
+  background: var(--color-card);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-neon);
+  padding: 2em;
+  margin: 1em 0;
+  color: var(--color-text);
+  transition: box-shadow var(--transition);
+}
+.ui-card:hover {
+  box-shadow: 0 0 32px var(--color-primary-neon);
+}

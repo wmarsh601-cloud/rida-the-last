@@ -1,0 +1,21 @@
+/* Global Dark Blue Neon Theme */
+:root {
+  --color-bg: #0a1026;
+  --color-bg-alt: #131b3a;
+  --color-primary: #1e90ff;
+  --color-primary-neon: #00e6ff;
+  --color-card: #162044;
+  --color-text: #eaf6fb;
+  --color-accent: #ff00cc;
+  --border-radius: 12px;
+  --shadow-neon: 0 0 12px var(--color-primary-neon), 0 0 2px var(--color-primary);
+  --transition: 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}

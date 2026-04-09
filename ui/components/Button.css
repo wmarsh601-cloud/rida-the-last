@@ -1,0 +1,16 @@
+.ui-btn {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-neon));
+  color: var(--color-text);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.75em 2em;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-neon);
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.ui-btn:hover {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-primary-neon));
+  box-shadow: 0 0 24px var(--color-primary-neon);
+}
