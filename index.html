@@ -57,15 +57,25 @@
     </div>
     <div id="client-section" style="display:none;margin-top:24px;">
       <h3>Request Ride</h3>
-      <p>Client mode placeholder screen.</p>
+      <div id="client-main">
+        <button id="request-ride-btn" style="padding:12px 32px;font-size:1.1em;border-radius:6px;border:none;background:#1e90ff;color:white;margin:18px auto 0 auto;display:block;">Request Ride</button>
+      </div>
+      <div id="ride-status" style="margin-top:18px;font-size:1.1em;"></div>
     </div>
     <div id="driver-section" style="display:none;margin-top:24px;">
       <h3>Driver Dashboard</h3>
-      <p>Driver mode placeholder screen.</p>
+      <div style="margin:18px 0;">
+        <button id="driver-status-btn" style="padding:10px 28px;font-size:1em;border-radius:6px;border:none;background:#28a745;color:white;">Go Online</button>
+      </div>
+      <div id="driver-status-label" style="margin-top:12px;font-size:1.1em;"></div>
     </div>
     <div id="marketplace-section" style="display:none;margin-top:24px;">
-      <h3>Coming soon</h3>
-      <p>Marketplace placeholder screen.</p>
+      <h3>Marketplace</h3>
+      <ul id="marketplace-list" style="list-style:none;padding:0;margin:18px 0 0 0;">
+        <li style="background:#223a5d;margin:10px auto 0 auto;padding:14px 0;border-radius:6px;max-width:260px;">Car Wash - $10</li>
+        <li style="background:#223a5d;margin:10px auto 0 auto;padding:14px 0;border-radius:6px;max-width:260px;">Oil Change - $25</li>
+        <li style="background:#223a5d;margin:10px auto 0 auto;padding:14px 0;border-radius:6px;max-width:260px;">Tire Service - $15</li>
+      </ul>
     </div>
   </div>
 
@@ -117,6 +127,7 @@
   <!-- SUPABASE AUTH UI/LOGIC & APP FLOW -->
   <script type="module" src="./ui/lib/auth-ui.js"></script>
   <script type="module" src="./ui/lib/app-flow.js"></script>
+  <script type="module" src="./ui/lib/dashboard-features.js"></script>
 
 </body>
 </html>
