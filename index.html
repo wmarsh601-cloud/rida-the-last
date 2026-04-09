@@ -6,21 +6,88 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial;
-      background: #0b1a2f;
-      color: white;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0b1a2f 60%, #1a2950 100%);
+      color: #eaf6ff;
       text-align: center;
+      min-height: 100vh;
     }
 
     h1 {
-      margin-top: 50px;
+      margin-top: 48px;
+      font-size: 2.3em;
+      letter-spacing: 2px;
+      text-shadow: 0 0 12px #00eaff, 0 0 24px #1e90ff;
     }
 
-    #map {
-      height: 400px;
-      width: 90%;
-      margin: 20px auto;
+    .glass {
+      background: rgba(18, 34, 64, 0.55);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px 0 rgba(0, 234, 255, 0.12), 0 1.5px 8px 0 rgba(30, 144, 255, 0.18);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(0,234,255,0.18);
+      margin: 24px auto;
+      padding: 32px 24px 24px 24px;
+      max-width: 350px;
+      transition: box-shadow 0.2s;
+    }
+
+    .glass:hover {
+      box-shadow: 0 0 24px 2px #00eaff, 0 1.5px 8px 0 #1e90ff;
+    }
+
+    .glow-btn {
+      background: linear-gradient(90deg, #1e90ff 60%, #00eaff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 0;
+      width: 100%;
+      font-size: 1.1em;
+      margin: 14px 0 0 0;
+      box-shadow: 0 0 12px #00eaff, 0 0 24px #1e90ff;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .glow-btn:hover {
+      background: linear-gradient(90deg, #00eaff 60%, #1e90ff 100%);
+      box-shadow: 0 0 24px 4px #00eaff, 0 0 32px 2px #1e90ff;
+    }
+
+    .input-glass {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
       border-radius: 10px;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: #eaf6ff;
+      font-size: 1em;
+      box-shadow: 0 0 8px #00eaff33;
+      outline: none;
+      backdrop-filter: blur(4px);
+      transition: box-shadow 0.2s;
+    }
+    .input-glass:focus {
+      box-shadow: 0 0 16px #00eaff99;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: #00eaff;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 10px;
+      margin-bottom: 0;
+      padding: 0;
+    }
+
+    .form-title {
+      font-size: 1.3em;
+      margin-bottom: 18px;
+      text-shadow: 0 0 8px #00eaff99;
     }
   </style>
 </head>
@@ -31,19 +98,38 @@
 
 
 
+
   <div id="auth-container">
-    <form id="login-form" style="max-width:320px;margin:30px auto;display:block;background:#13294b;padding:24px 18px;border-radius:8px;">
-      <h2>Login</h2>
-      <input id="email" type="email" placeholder="Email" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
-      <input id="password" type="password" placeholder="Password" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
-      <button type="submit" style="width:45%;margin:8px 2%;padding:8px 0;border-radius:4px;border:none;background:#1e90ff;color:white;">Login</button>
+    <!-- LOGIN FORM -->
+    <form id="login-form" class="glass" style="display:block;">
+      <div class="form-title">Iniciar sesión</div>
+      <input id="login-email" class="input-glass" type="email" placeholder="Email o teléfono" required />
+      <input id="login-password" class="input-glass" type="password" placeholder="Contraseña" required />
+      <button type="submit" class="glow-btn">Iniciar sesión</button>
+      <button type="button" class="link-btn" id="show-register">Crear cuenta</button>
+      <button type="button" class="link-btn" id="show-recover">¿Olvidaste tu contraseña?</button>
     </form>
-    <form id="register-form" style="max-width:320px;margin:0 auto 16px auto;display:block;background:#13294b;padding:18px;border-radius:8px;">
-      <h2>Register</h2>
-      <input id="reg-email" type="email" placeholder="Email" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
-      <input id="reg-password" type="password" placeholder="Password" required style="width:90%;margin:8px 0;padding:8px;border-radius:4px;border:none;" /><br>
-      <button type="submit" style="width:45%;margin:8px 2%;padding:8px 0;border-radius:4px;border:none;background:#28a745;color:white;">Register</button>
+
+    <!-- REGISTER FORM -->
+    <form id="register-form" class="glass" style="display:none;">
+      <div class="form-title">Crear cuenta</div>
+      <input id="reg-name" class="input-glass" type="text" placeholder="Nombre" required />
+      <input id="reg-email" class="input-glass" type="email" placeholder="Email" required />
+      <input id="reg-phone" class="input-glass" type="tel" placeholder="Teléfono" required />
+      <input id="reg-password" class="input-glass" type="password" placeholder="Contraseña" required />
+      <input id="reg-password2" class="input-glass" type="password" placeholder="Confirmar contraseña" required />
+      <button type="submit" class="glow-btn">Crear cuenta</button>
+      <button type="button" class="link-btn" id="show-login">¿Ya tienes cuenta? Inicia sesión</button>
     </form>
+
+    <!-- RECOVER FORM -->
+    <form id="recover-form" class="glass" style="display:none;">
+      <div class="form-title">Recuperar contraseña</div>
+      <input id="recover-email" class="input-glass" type="email" placeholder="Email" required />
+      <button type="submit" class="glow-btn">Enviar enlace de recuperación</button>
+      <button type="button" class="link-btn" id="show-login2">Volver a iniciar sesión</button>
+    </form>
+
     <div id="auth-message" style="margin:10px 0;min-height:24px;"></div>
   </div>
 
@@ -125,7 +211,7 @@
 
 
   <!-- SUPABASE AUTH UI/LOGIC & APP FLOW -->
-  <script type="module" src="./ui/lib/auth-ui.js"></script>
+  <script type="module" src="./ui/lib/auth-session.js"></script>
   <script type="module" src="./ui/lib/app-flow.js"></script>
   <script type="module" src="./ui/lib/dashboard-features.js"></script>
 

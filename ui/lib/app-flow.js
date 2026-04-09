@@ -1,6 +1,12 @@
 // App flow and dashboard navigation for static HTML
 import supabase from './supabaseClient.js';
 
+// Protección de rutas y sesión
+async function getUserRole() {
+  const { data: { user } } = await supabase.auth.getUser();
+  return user?.user_metadata?.role || null;
+}
+
 const authContainer = document.getElementById('auth-container');
 const appContainer = document.getElementById('app-container');
 const dashboardEmail = document.getElementById('dashboard-email');
@@ -18,11 +24,41 @@ function showSection(section) {
   marketplaceSection.style.display = section === 'marketplace' ? 'block' : 'none';
 }
 
-function showDashboard(email) {
+
+let currentUserRole = null;
+async function showDashboard(email) {
   authContainer.style.display = 'none';
   appContainer.style.display = 'block';
   dashboardEmail.textContent = email;
-  showSection('client'); // Default to client mode
+  currentUserRole = await getUserRole();
+
+  // Mostrar solo el botón del rol correspondiente (admin ve todos)
+  if (currentUserRole === 'client') {
+    clientBtn.style.display = '';
+    driverBtn.style.display = 'none';
+    marketplaceBtn.style.display = 'none';
+    showSection('client');
+  } else if (currentUserRole === 'driver') {
+    clientBtn.style.display = 'none';
+    driverBtn.style.display = '';
+    marketplaceBtn.style.display = 'none';
+    showSection('driver');
+  } else if (currentUserRole === 'vendor') {
+    clientBtn.style.display = 'none';
+    driverBtn.style.display = 'none';
+    marketplaceBtn.style.display = '';
+    showSection('marketplace');
+  } else if (currentUserRole === 'admin') {
+    clientBtn.style.display = '';
+    driverBtn.style.display = '';
+    marketplaceBtn.style.display = '';
+    showSection('client');
+  } else {
+    // Si el rol no es válido, ocultar todo
+    clientBtn.style.display = 'none';
+    driverBtn.style.display = 'none';
+    marketplaceBtn.style.display = 'none';
+  }
 }
 
 function showLogin() {
@@ -39,6 +75,7 @@ logoutBtn.addEventListener('click', async () => {
 });
 
 // Listen for auth state changes
+
 supabase.auth.onAuthStateChange((_event, session) => {
   if (session && session.user) {
     showDashboard(session.user.email);
@@ -48,7 +85,8 @@ supabase.auth.onAuthStateChange((_event, session) => {
 });
 
 // On load, check session
-supabase.auth.getSession().then(({ data: { session } }) => {
+
+supabase.auth.getSession().then(async ({ data: { session } }) => {
   if (session && session.user) {
     showDashboard(session.user.email);
   } else {
